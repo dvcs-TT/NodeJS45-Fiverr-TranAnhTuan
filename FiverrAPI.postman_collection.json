@@ -1,0 +1,1023 @@
+{
+  "info": {
+    "_postman_id": "04e486b5-a97e-4ad9-97e8-6f7f47d9b446",
+    "name": "FiverrAPI",
+    "description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) in \"Tests\" to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23648943"
+  },
+  "item": [
+    {
+      "name": "Sign Up",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"test postman\",\n  \"email\": \"postman@gmail.com\",\n  \"password\": \"1234\",\n  \"phone\": \"123456789\",\n  \"birthday\": \"2024-04-13T09:39:34.856Z\",\n  \"gender\": \"M\",\n  \"role\": \"member\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/auth/sign-up",
+          "host": ["{{domain}}"],
+          "path": ["auth", "sign-up"]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "Sign In",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"postman@gmail.com\",\r\n  \"password\": \"1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/auth/login",
+          "host": ["{{domain}}"],
+          "path": ["auth", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Job Type",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "token",
+            "value": "{{token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"job_type_name\": \"Test\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job-type/create-job-type",
+          "host": ["{{domain}}"],
+          "path": ["job-type", "create-job-type"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Job Type",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job-type/get-all-job-type",
+          "host": ["{{domain}}"],
+          "path": ["job-type", "get-all-job-type"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Job Type By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job-type/get-job-type-by-id/3",
+          "host": ["{{domain}}"],
+          "path": ["job-type", "get-job-type-by-id", "3"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Job Type By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_type_name\": \"Postman_Updated\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job-type/update-job-type-by-id/12",
+          "host": ["{{domain}}"],
+          "path": ["job-type", "update-job-type-by-id", "12"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Job Type By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job-type/delete-job-type-by-id/13",
+          "host": ["{{domain}}"],
+          "path": ["job-type", "delete-job-type-by-id", "13"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Job Type Detail",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_type_detail_name\": \"Test\",\r\n    \"image\": \"string\",\r\n    \"job_type_id\": 12\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job-type-detail/create-job-type-detail",
+          "host": ["{{domain}}"],
+          "path": ["job-type-detail", "create-job-type-detail"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Job Type Detail List",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"detail_name\": \"Test Postman\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job-type-detail/create-job-type-detail-list/10",
+          "host": ["{{domain}}"],
+          "path": ["job-type-detail", "create-job-type-detail-list", "10"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Job Type Detail",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job-type-detail/get-all-job-type-detail",
+          "host": ["{{domain}}"],
+          "path": ["job-type-detail", "get-all-job-type-detail"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Job Type Detail By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job-type-detail/get-job-type-detail-by-id/2",
+          "host": ["{{domain}}"],
+          "path": ["job-type-detail", "get-job-type-detail-by-id", "2"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Job Type Detail By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_type_detail_name\": \"Test\",\r\n    \"image\": \"string\",\r\n    \"job_type_id\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job-type-detail/update-job-type-detail-by-id/15",
+          "host": ["{{domain}}"],
+          "path": ["job-type-detail", "update-job-type-detail-by-id", "15"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Job Type Detail List By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"detail_name\": \"Postman\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job-type-detail/update-job-type-detail-list-by-id/23",
+          "host": ["{{domain}}"],
+          "path": ["job-type-detail", "update-job-type-detail-list-by-id", "23"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Job Type Detail By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job-type-detail/delete-job-type-detail-by-id/17",
+          "host": ["{{domain}}"],
+          "path": ["job-type-detail", "delete-job-type-detail-by-id", "17"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Upload Job Type Detail Picture By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "postman-cloud:///1eeff7d1-ad44-4d60-a3b9-18a4e2ed5982"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{domain}}/job-type-detail/upload-job-type-detail-picture-by-id/15",
+          "host": ["{{domain}}"],
+          "path": [
+            "job-type-detail",
+            "upload-job-type-detail-picture-by-id",
+            "15"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Job",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job/get-all-job",
+          "host": ["{{domain}}"],
+          "path": ["job", "get-all-job"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Job By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job/get-job-by-id/3",
+          "host": ["{{domain}}"],
+          "path": ["job", "get-job-by-id", "3"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Job By Job Name",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_name\": \"I will\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job/get-job-by-job-name",
+          "host": ["{{domain}}"],
+          "path": ["job", "get-job-by-job-name"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Job By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_name\": \"Test\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job/update-job-by-id/36",
+          "host": ["{{domain}}"],
+          "path": ["job", "update-job-by-id", "36"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Job By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/job/delete-job-by-id/36",
+          "host": ["{{domain}}"],
+          "path": ["job", "delete-job-by-id", "36"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Job",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_name\": \"string\",\r\n    \"rate\": 5,\r\n    \"salary\": 5000,\r\n    \"image\": \"string\",\r\n    \"job_title\": \"string\",\r\n    \"job_sub_title\": \"string\",\r\n    \"job_star\": 5,\r\n    \"job_type_detail_id\": 5,\r\n    \"user_id\": 4\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/job/create-job",
+          "host": ["{{domain}}"],
+          "path": ["job", "create-job"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Job Picture By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "postman-cloud:///1eeff7d1-ad44-4d60-a3b9-18a4e2ed5982"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{domain}}/job/upload-job-picture-by-id/38",
+          "host": ["{{domain}}"],
+          "path": ["job", "upload-job-picture-by-id", "38"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Comment",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_id\": 3,\r\n    \"user_id\": 1,\r\n    \"content\": \"string\",\r\n    \"comment_star\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/comment/create-comment",
+          "host": ["{{domain}}"],
+          "path": ["comment", "create-comment"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Comments",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/comment/get-all-comments",
+          "host": ["{{domain}}"],
+          "path": ["comment", "get-all-comments"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Comment By Job Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/comment/get-comment-by-job-id/3",
+          "host": ["{{domain}}"],
+          "path": ["comment", "get-comment-by-job-id", "3"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Comment By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"content\": \"Test\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/comment/update-comment-by-id/1",
+          "host": ["{{domain}}"],
+          "path": ["comment", "update-comment-by-id", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Comment By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/comment/delete-comment-by-id/3",
+          "host": ["{{domain}}"],
+          "path": ["comment", "delete-comment-by-id", "3"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create User",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"string1\",\r\n    \"email\": \"string1@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"phone\": \"0903999999\",\r\n    \"gender\": \"M\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/user/create-user",
+          "host": ["{{domain}}"],
+          "path": ["user", "create-user"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/user/get-all-users",
+          "host": ["{{domain}}"],
+          "path": ["user", "get-all-users"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/user/get-user-by-id/1",
+          "host": ["{{domain}}"],
+          "path": ["user", "get-user-by-id", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User By User Name",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userName\": \"test\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/user/get-user-by-user-name",
+          "host": ["{{domain}}"],
+          "path": ["user", "get-user-by-user-name"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update User By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"NameA\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/user/update-user-by-id/1",
+          "host": ["{{domain}}"],
+          "path": ["user", "update-user-by-id", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/user/delete-user-by-id/5",
+          "host": ["{{domain}}"],
+          "path": ["user", "delete-user-by-id", "5"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Hire",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_id\": 38,\r\n    \"user_id\": 4,\r\n    \"complete\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/hire/create-hire",
+          "host": ["{{domain}}"],
+          "path": ["hire", "create-hire"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Hirings",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/hire/get-all-hirings",
+          "host": ["{{domain}}"],
+          "path": ["hire", "get-all-hirings"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Hiring By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/hire/get-hiring-by-id/3",
+          "host": ["{{domain}}"],
+          "path": ["hire", "get-hiring-by-id", "3"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Hired By User Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/hire/get-hired-by-user-id/1",
+          "host": ["{{domain}}"],
+          "path": ["hire", "get-hired-by-user-id", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Hiring By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"job_id\": 4,\r\n    \"complete\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/hire/update-hiring-by-id/7",
+          "host": ["{{domain}}"],
+          "path": ["hire", "update-hiring-by-id", "7"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Hiring By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/hire/delete-hiring-by-id/7",
+          "host": ["{{domain}}"],
+          "path": ["hire", "delete-hiring-by-id", "7"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Complete Marking By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"complete\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{domain}}/hire/complete-marking-by-id/3",
+          "host": ["{{domain}}"],
+          "path": ["hire", "complete-marking-by-id", "3"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "domain",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
